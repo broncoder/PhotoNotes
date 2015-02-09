@@ -41,6 +41,25 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        heros.clear();
+        query();
+        // set list adapter
+        listView.setAdapter(new MyAdapter(this, R.layout.activeity_detail, heros));
+        // add list listners
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Hero hero = heros.get(position);
+                final Intent intent = new Intent(MainActivity.this, DetailActivity.class).putExtra("myHero", hero);
+                startActivity(intent);
+            }
+        });
+    }
+
     // sqlite related
     private void deleteAll() {
         SQLiteDatabase db = new DBHelper(this).getWritableDatabase();
