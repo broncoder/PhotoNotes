@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        // deleteAll();
+         deleteAll();
         // query heros
         query();
         // set list adapter
@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 	Hero hero = heros.get(position);
                 	final Intent intent = new Intent(MainActivity.this, DetailActivity.class).putExtra("myHero", hero);
-                	startActivity(intent);                	
+                	startActivity(intent);
             }
         });
     }
@@ -80,9 +80,8 @@ public class MainActivity extends ActionBarActivity {
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
-            String description = cursor.getString(2);
             String filepath = cursor.getString(3);
-            heros.add(new Hero(name, ""));
+            heros.add(new Hero(name, filepath));
             Log.d("PhotoNotes", String.format("%s, %s",  name,  filepath));
         }
     }

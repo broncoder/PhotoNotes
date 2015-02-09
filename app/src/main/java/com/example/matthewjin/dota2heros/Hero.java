@@ -8,7 +8,10 @@ public class Hero implements Parcelable{
     private String filename;
 
     public Hero(Parcel source){
-    	readFromParcel(source);
+    	String[] data = new String[2];
+        source.readStringArray(data);
+        name = data[0];
+        filename = data[1];
     }
     public Hero(String name, String filename) {
         this.name = name;
@@ -45,9 +48,6 @@ public class Hero implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-		dest.writeString(name);
-	}
-	public void readFromParcel(Parcel source){
-		name = source.readString();
+		dest.writeStringArray(new String[]{ this.name, this.filename});
 	}
 }
